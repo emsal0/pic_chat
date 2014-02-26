@@ -46,3 +46,4 @@ end
 
 gem 'faye'
 gem 'thin'
+gem 'cookiejar'
