@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20140226015726) do
 
   create_table "doodles", force: true do |t|
+    t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
