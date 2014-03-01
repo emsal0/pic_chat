@@ -68,6 +68,12 @@
 	submit.addEventListener("click", function (e) {
 		var img = c.toDataURL("image/jpg");
 		var b64img = btoa(img);
+		$.ajax({
+			url: <%= create_doodle_path %>,
+			type: "PUT",
+			contentType: "image/jpg;base64",
+			data: b64img,
+		})
 	});
 
 </script>
