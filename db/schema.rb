@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20140226015726) do
     t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "room_id"
   end
 
   create_table "rooms", force: true do |t|
