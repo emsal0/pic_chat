@@ -4,8 +4,7 @@ class DoodlesController < ApplicationController
 		img = Base64.decode(imgurl['data:image/jpg;base64,'.length .. -1])
 		@doodle = Doodle.new
 		@doodle.save
-		@id = @doodle.id
-		@doodle.path = '#{Rails.root}/assets/images/doodles/#{@id}.jpg'
+		@doodle.path = '#{Rails.root}/assets/images/doodles/#{@doodle.id}.jpg'
 		@doodle.save
 		File.open(@doodle.path, 'wb') { |f| f.write(img) }
 	end

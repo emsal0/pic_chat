@@ -4,6 +4,7 @@ PicChat::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root to: "room#index", as: "room"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -13,7 +14,6 @@ PicChat::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-	resources :rooms
   put "send_doodle", to: "doodles#create", as: "create_doodle"
 
   # Example resource route with options:
