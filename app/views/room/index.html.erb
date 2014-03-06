@@ -1,13 +1,10 @@
 <script src="jscolor/jscolor.js">
 </script>
-
-
 <div id="roomview" width="300px" height="500px"></div>
 <canvas id="draw_doodle" width="256" height="256"></canvas>
 <input class="color" id="colorpicker" value="FFFFFF"></input>
 <input id="size_input" value="3"></input>
 <input type="submit" id="doodle_submit"></input>
-
 <script type="text/javascript"> <!-- Is not Executing --//>
 	window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
@@ -73,5 +70,16 @@
 		});
 	});
 	requestAnimationFrame(updateCanvasColor);
+
+	/*submit.addEventListener("click", function (e) {
+		var img = c.toDataURL("image/jpg");
+		var b64img = btoa(img);
+		$.ajax({
+			url: <%= create_doodle_path %>,
+			type: "PUT",
+			contentType: "image/jpg;base64",
+			data: b64img,
+		});
+	});*/
 
 </script>
