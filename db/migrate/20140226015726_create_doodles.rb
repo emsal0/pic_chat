@@ -3,7 +3,6 @@ class CreateDoodles < ActiveRecord::Migration
     create_table :doodles do |t|
     	t.string :path
       t.timestamps
-      t.references :room
     end
   end
 end
