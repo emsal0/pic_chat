@@ -4,8 +4,10 @@
 <canvas id="draw_doodle" width="256" height="256"></canvas>
 <input class="color" id="colorpicker" value="FFFFFF"></input>
 <input id="size_input" value="3"></input>
-<input type="submit" id="doodle_submit"></input>
-<script type="text/javascript"> <!-- Is not Executing --//>
+<form id="doodle_form">
+	<input type="submit" id="doodle_submit"></input>
+</form>
+<script type="text/javascript"> 
 	window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
 	var c = document.getElementById("draw_doodle");
@@ -15,13 +17,15 @@
 	var m = document.getElementById("colorpicker")
 	var s = document.getElementById("size_input")
 	var isMouseDown = false; 
-	var submitb = document.getElementById(doodle_submit);
+	var submitb = document.getElementById("doodle_submit");
 	function updateCanvasColor() {
 		var val = "#"+m.value;
 		canvas.fillStyle = val;
 		canvas.strokeStyle = val;
 		requestAnimationFrame(updateCanvasColor);
 	}
+
+
 
 	c.addEventListener("mousedown", function (e) {
 		isMouseDown = true;
@@ -68,18 +72,16 @@
 			
 			c.removeEventListener("mousemove");
 		});
-	});
+	},false);
 	requestAnimationFrame(updateCanvasColor);
 
-	/*submit.addEventListener("click", function (e) {
-		var img = c.toDataURL("image/jpg");
-		var b64img = btoa(img);
-		$.ajax({
-			url: <%= create_doodle_path %>,
-			type: "PUT",
-			contentType: "image/jpg;base64",
-			data: b64img,
-		});
-	});*/
 
+
+</script>
+<script>
+	//var client = new Faye.client("http://localhost:9292/faye");
+	var c = document.getElementById("draw_doodle");
+	$("#doodle_form").submit(function() {
+		$.ajax({ type: "POST", url: "/send_doodle", data: { "imgurl": c.toDataURL() } }).fail(function() {});
+	});
 </script>

@@ -1,12 +1,14 @@
 class DoodlesController < ApplicationController
 	def create
 		imgurl = params[:imgurl]
-		img = Base64.decode(imgurl['data:image/jpg;base64,'.length .. -1])
+		img = Base64.decode64(imgurl['data:image/jpg;base64,'.length .. -1])
 		@doodle = Doodle.new
 		@doodle.save
-		@doodle.path = '#{Rails.root}/app/assets/images/doodles/#{@doodle.id}.jpg'
+		@path = "app/assets/images/doodles/" + @doodle.id.to_s + '.jpg'
+		@doodle.path = @path
 		@doodle.save
 		File.open(@doodle.path, 'wb') { |f| f.write(img) }
+		redirect_to 'room#index'
 	end
 
 	def show

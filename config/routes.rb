@@ -14,7 +14,7 @@ PicChat::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  put "send_doodle", to: "doodles#create", as: "create_doodle"
+  post "send_doodle", to: "doodles#create", as: "create_doodle"
 
   # Example resource route with options:
   #   resources :products do
