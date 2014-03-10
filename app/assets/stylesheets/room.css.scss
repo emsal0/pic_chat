@@ -2,11 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .color {
-    display: block;
+  display: block;
 }
 
 #draw_doodle {
-    display: block;
-    border: 1px solid black;
+  display: block;
+  border: 1px solid black;
 
+}
+
+#roomview {
+	width: 300px;
+	height: 500px;
+	overflow: scroll;
+}
+
+img.doodle {
+	border: 1px solid black;
 }
