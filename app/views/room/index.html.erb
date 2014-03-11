@@ -4,7 +4,7 @@
 <canvas id="draw_doodle" width="256" height="256"></canvas>
 <input class="color" id="colorpicker" value="FFFFFF"></input>
 <input id="size_input" value="3"></input>
-<%= javascript_include_tag "http://localhost:9292/faye.js" %>
+<%= javascript_include_tag "http://24.85.181.194:9292/faye.js" %>
 <form id="doodle_form">
 	<input type="submit" id="doodle_submit"></input>
 </form>
@@ -82,24 +82,19 @@
 
 </script>
 <script>
-	var client = new Faye.Client("http://localhost:9292/faye");
+	var client = new Faye.Client("http://24.85.181.194:9292/faye");
 	var subscription = client.subscribe('/messages/public', function(data) {
 		
-		var newImg = "<img class='doodle' src='doodles/"+data["id"]+".jpg' />"
+		var newImg = "<img class='doodle' src='"+data["imgurl"] +" />"
 		$("#roomview").append(newImg);
 		$('#roomview').animate({ scrollTop: $('#roomview').prop('scrollHeight') })
 	});
 	var c = document.getElementById("draw_doodle");
 	$("#doodle_form").submit(function() {
-		$.ajax({ type: "POST", url: "/send_doodle", data: { "imgurl": c.toDataURL() } }).done(function(data) {
-			c.getContext("2d").fillStyle = "#FFFFFF";
-			c.getContext("2d").fillRect(0,0,w,h);
-			client.publish('/messages/public', 
+		client.publish('/messages/public', 
 			{
-				id: data["id"],
+				imgurl: c.toDataURL(),
 			});
-		});
-
 		return false;
 	});
 </script>
