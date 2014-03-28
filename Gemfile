@@ -47,3 +47,4 @@ end
 gem 'faye'
 gem 'thin'
 gem 'cookiejar'
+gem 'jquery_mobile_rails'

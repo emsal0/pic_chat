@@ -85,16 +85,21 @@
 	var client = new Faye.Client("http://24.85.181.194:9292/faye");
 	var subscription = client.subscribe('/messages/public', function(data) {
 		
-		var newImg = "<img class='doodle' src='"+data["imgurl"] +" />"
+		var newImg = "<img class='doodle' src='doodles/"+data["id"]+".jpg' />"
 		$("#roomview").append(newImg);
 		$('#roomview').animate({ scrollTop: $('#roomview').prop('scrollHeight') })
 	});
 	var c = document.getElementById("draw_doodle");
 	$("#doodle_form").submit(function() {
-		client.publish('/messages/public', 
+		$.ajax({ type: "POST", url: "/send_doodle", data: { "imgurl": c.toDataURL() } }).done(function(data) {
+			c.getContext("2d").fillStyle = "#FFFFFF";
+			c.getContext("2d").fillRect(0,0,w,h);
+			client.publish('/messages/public', 
 			{
-				imgurl: c.toDataURL(),
+				id: data["id"],
 			});
+		});
+		
 		return false;
 	});
 </script>
